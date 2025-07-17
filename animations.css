@@ -1,0 +1,252 @@
+/* 3D Transformations */
+.project-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: var(--transition);
+}
+
+.project-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.project-card:hover .project-card-inner {
+    transform: rotateY(15deg) rotateX(10deg);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.hero-title {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* 3D Card Effect */
+.project-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateZ(0);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: 
+        translateZ(20px) 
+        rotateX(5deg) 
+        rotateY(5deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Skill Items 3D */
+.skill-item {
+    transform: translateZ(0);
+    transition: transform 0.3s;
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.skill-item:hover {
+    transform: 
+        translateZ(10px) 
+        rotateX(3deg) 
+        rotateY(3deg);
+}
+
+/* Button Depth Effect */
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    transition: transform 0.3s;
+}
+
+.submit-btn:active {
+    transform: translateZ(10px) scale(0.95);
+}
+
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.submit-btn:hover::after {
+    opacity: 1;
+}
+
+/* Parallax Scrolling Effect */
+.section {
+    transform: translateZ(0);
+    transition: transform 0.4s;
+}
+/* ===== Enhanced Animations ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Loading Animation for Submit Button */
+.submit-btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Success and Error States */
+.submit-btn.success {
+    background: var(--sage-green);
+}
+
+.submit-btn.error {
+    background: var(--soft-pink);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    z-index: 1001;
+    transition: width 0.3s var(--smooth);
+}
+
+/* Mobile Menu Animations */
+.nav-link.fade-in {
+    animation: fadeIn 0.5s var(--bounce) forwards;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s var(--smooth);
+    }
+    
+    .nav-links.active {
+        transform: translateX(0);
+    }
+    
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
+
+/* Stop animations during window resize */
+.resize-animation-stopper * {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
